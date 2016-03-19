@@ -19,11 +19,32 @@ RSpec.describe(Matrix) do
     expect { Matrix.new(251, 10) }.to raise_error(ArgumentError)
   end
 
+  it 'rises error when width is lower than 0' do
+    expect { Matrix.new(-1, 10) }.to raise_error(ArgumentError)
+  end
+
   it 'rises error when height exceed max height' do
     expect { Matrix.new(10, 251) }.to raise_error(ArgumentError)
   end
 
+  it 'rises error when height is lower than 0' do
+    expect { Matrix.new(10, -1) }.to raise_error(ArgumentError)
+  end
+
   it 'rises error when background color is invalid' do
     expect { Matrix.new(10, 10, 'TEST') }.to raise_error(ArgumentError)
+  end
+
+  it 'colours pixel' do
+    matrix.colours_pixel(1, 2, 'A')
+    expect(matrix.bitmap).to eq({[1, 2] => 'A'})
+  end
+
+  it 'rises error when X parameter is invalid' do
+    expect { matrix.colours_pixel(11, 2, 'A') }.to raise_error(ArgumentError)
+  end
+
+  it 'rises error when Y parameter is invalid' do
+    expect { matrix.colours_pixel(10, 7, 'A') }.to raise_error(ArgumentError)
   end
 end

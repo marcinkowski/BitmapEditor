@@ -47,4 +47,9 @@ RSpec.describe(Matrix) do
   it 'rises error when Y parameter is invalid' do
     expect { matrix.colours_pixel(10, 7, 'A') }.to raise_error(ArgumentError)
   end
+
+  it 'draws vertical segment' do
+    matrix.draw_vertical_segment(2, 3, 5, 'A')
+    expect(matrix.bitmap).to eq({[2, 3] => 'A', [2, 4] => 'A', [2, 5] => 'A'})
+  end
 end

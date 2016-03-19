@@ -23,6 +23,17 @@ class Matrix
     @bitmap[[x, y]] = colour
   end
 
+  def draw_vertical_segment(x, y_start, y_end, colour)
+    valid_x?(x)
+    valid_y?(y_start)
+    valid_y?(y_end)
+    valid_colour?(colour)
+
+    (y_start..y_end). each do |y|
+      @bitmap[[x, y]] = colour
+    end
+  end
+
   private
 
   def valid_x?(x)

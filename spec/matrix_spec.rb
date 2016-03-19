@@ -52,4 +52,9 @@ RSpec.describe(Matrix) do
     matrix.draw_vertical_segment(2, 3, 5, 'A')
     expect(matrix.bitmap).to eq({[2, 3] => 'A', [2, 4] => 'A', [2, 5] => 'A'})
   end
+
+  it 'draws horizontal segment' do
+    matrix.draw_horizontal_segment(3, 8, 10, 'A')
+    expect(matrix.bitmap).to eq({[8, 3] => 'A', [9, 3] => 'A', [10, 3] => 'A'})
+  end
 end

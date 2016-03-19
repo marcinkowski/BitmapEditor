@@ -29,7 +29,18 @@ class Matrix
     valid_y?(y_end)
     valid_colour?(colour)
 
-    (y_start..y_end). each do |y|
+    (y_start..y_end).each do |y|
+      @bitmap[[x, y]] = colour
+    end
+  end
+
+  def draw_horizontal_segment(y, x_start, x_end, colour)
+    valid_y?(y)
+    valid_x?(x_start)
+    valid_x?(x_end)
+    valid_colour?(colour)
+
+    (x_start..x_end).each do |x|
       @bitmap[[x, y]] = colour
     end
   end

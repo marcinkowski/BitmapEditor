@@ -57,4 +57,10 @@ RSpec.describe(Matrix) do
     matrix.draw_horizontal_segment(3, 8, 10, 'A')
     expect(matrix.bitmap).to eq({[8, 3] => 'A', [9, 3] => 'A', [10, 3] => 'A'})
   end
+
+  it 'clears bitmap' do
+    matrix.colours_pixel(1, 2, 'A')
+    matrix.clear
+    expect(matrix.bitmap).to eq({})
+  end
 end

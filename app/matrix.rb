@@ -45,6 +45,10 @@ class Matrix
     end
   end
 
+  def clear
+    @bitmap.clear
+  end
+
   private
 
   def valid_x?(x)

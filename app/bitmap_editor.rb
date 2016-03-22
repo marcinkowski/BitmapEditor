@@ -17,6 +17,8 @@ class BitmapEditor
             create_matrix($1.to_i, $2.to_i)
           when /^L ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
             colours_pixel($1.to_i, $2.to_i, $3)
+          when /^F ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
+            fill($1.to_i, $2.to_i, $3)
           when /^V ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
             draw_vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
           when /^H ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
@@ -56,6 +58,10 @@ class BitmapEditor
 
   def colours_pixel(x, y, colour)
     @matrix ? @matrix.colours_pixel(x, y, colour) : error
+  end
+
+  def fill(x, y, colour)
+    @matrix ? @matrix.fill(x, y, colour) : error
   end
 
   def draw_vertical_segment(x, y_start, y_end, colour)

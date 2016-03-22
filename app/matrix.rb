@@ -49,7 +49,32 @@ class Matrix
     @bitmap.clear
   end
 
+  def fill(x, y, colour)
+    valid_x?(x)
+    valid_y?(y)
+    valid_colour?(colour)
+
+    old_colour = @bitmap[[x, y]]
+    colours_pixel(x, y, colour)
+
+    cross_pixels(x, y).each do |coordinates|
+      if old_colour == @bitmap[[coordinates[0], coordinates[1]]]
+        fill(coordinates[0], coordinates[1], colour)
+      end
+    end
+  end
+
   private
+
+  def cross_pixels(x, y)
+    [[x, y-1], [x, y+1], [x+1, y], [x-1, y]].select do |value|
+      pixel_exists? value[0], value[1]
+    end
+  end
+
+  def pixel_exists?(x, y)
+    x <= @width && x >= 1 && y <= @height && y >= 1
+  end
 
   def valid_x?(x)
     raise ArgumentError.new("Parameter X has to be between 1 and #{@width}.") if x > @width || x < 1

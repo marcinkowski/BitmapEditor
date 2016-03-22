@@ -14,23 +14,12 @@ class BitmapEditor
           when 'X'
             exit_console
           when /^I ([1-9][0-9]*) ([1-9][0-9]*)$/
-            create_matrix($1.to_i, $2.to_i)
-          when /^L ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
-            colours_pixel($1.to_i, $2.to_i, $3)
-          when /^F ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
-            fill($1.to_i, $2.to_i, $3)
-          when /^V ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
-            draw_vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
-          when /^H ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
-            draw_horizontal_segment($3.to_i, $1.to_i, $2.to_i, $4)
-          when 'C'
-            clear_matrix
-          when 'S'
-            puts display_matrix
-          when 'COLOUR'
-            puts display_colour_matrix
+            @command_interpreter = CommandInterpreter.new(Matrix.new(width, height), {
+                'S' => TextDisplay.new(@matrix),
+                'D' => ColourDisplay.new(@matrix)
+            })
           else
-            puts 'unrecognised command :('
+            @command_interpreter ? command_interpreter.interpret(input) : error
         end
       rescue ArgumentError => e
         puts e.message
@@ -42,34 +31,6 @@ class BitmapEditor
 
   def create_matrix(width, height)
     @matrix = Matrix.new(width, height)
-  end
-
-  def display_matrix
-    @matrix ? TextDisplay.new(@matrix).display : error
-  end
-
-  def display_colour_matrix
-    @matrix ? ColourDisplay.new(@matrix).display : error
-  end
-
-  def clear_matrix
-    @matrix ? @matrix.clear : error
-  end
-
-  def colours_pixel(x, y, colour)
-    @matrix ? @matrix.colours_pixel(x, y, colour) : error
-  end
-
-  def fill(x, y, colour)
-    @matrix ? @matrix.fill(x, y, colour) : error
-  end
-
-  def draw_vertical_segment(x, y_start, y_end, colour)
-    @matrix ? @matrix.draw_vertical_segment(x, y_start, y_end, colour) : error
-  end
-
-  def draw_horizontal_segment(y, x_start, x_end, colour)
-    @matrix ? @matrix.draw_horizontal_segment(y, x_start, x_end, colour) : error
   end
 
   def error

@@ -1,5 +1,4 @@
 require './app/matrix'
-require './app/display/colour_display'
 
 RSpec.describe(Matrix) do
   let(:matrix) { Matrix.new(10, 6) }
@@ -37,16 +36,16 @@ RSpec.describe(Matrix) do
   end
 
   it 'colours pixel' do
-    matrix.colours_pixel(1, 2, 'A')
+    matrix.colour_pixel(1, 2, 'A')
     expect(matrix.bitmap).to eq({[1, 2] => 'A'})
   end
 
   it 'rises error when X parameter is invalid' do
-    expect { matrix.colours_pixel(11, 2, 'A') }.to raise_error(ArgumentError)
+    expect { matrix.colour_pixel(11, 2, 'A') }.to raise_error(ArgumentError)
   end
 
   it 'rises error when Y parameter is invalid' do
-    expect { matrix.colours_pixel(10, 7, 'A') }.to raise_error(ArgumentError)
+    expect { matrix.colour_pixel(10, 7, 'A') }.to raise_error(ArgumentError)
   end
 
   it 'draws vertical segment' do
@@ -60,7 +59,7 @@ RSpec.describe(Matrix) do
   end
 
   it 'clears bitmap' do
-    matrix.colours_pixel(1, 2, 'A')
+    matrix.colour_pixel(1, 2, 'A')
     matrix.clear
     expect(matrix.bitmap).to eq({})
   end
@@ -126,7 +125,7 @@ RSpec.describe(Matrix) do
     matrix = Matrix.new(5,5)
     matrix.draw_horizontal_segment(1, 1, 5, 'N')
     matrix.draw_horizontal_segment(2, 1, 5, 'N')
-    matrix.colours_pixel(3, 3, 'N')
+    matrix.colour_pixel(3, 3, 'N')
     matrix.draw_horizontal_segment(4, 1, 5, 'N')
     matrix.draw_horizontal_segment(5, 1, 5, 'N')
     matrix.fill(2,2, 'Y')
@@ -202,11 +201,11 @@ RSpec.describe(Matrix) do
 
   it 'fills space of bitmap with different colour limited by diagonal border of other colour' do
     matrix = Matrix.new(5,5)
-    matrix.colours_pixel(1, 1, 'N')
-    matrix.colours_pixel(2, 2, 'N')
-    matrix.colours_pixel(3, 3, 'N')
-    matrix.colours_pixel(4, 4, 'N')
-    matrix.colours_pixel(5, 5, 'N')
+    matrix.colour_pixel(1, 1, 'N')
+    matrix.colour_pixel(2, 2, 'N')
+    matrix.colour_pixel(3, 3, 'N')
+    matrix.colour_pixel(4, 4, 'N')
+    matrix.colour_pixel(5, 5, 'N')
     matrix.fill(3,2, 'Y')
 
     expect(matrix.bitmap).to eq({
@@ -218,7 +217,7 @@ RSpec.describe(Matrix) do
 
   it 'fills space of one pixel with different colour' do
     matrix = Matrix.new(5,5)
-    matrix.colours_pixel(3, 3, 'N')
+    matrix.colour_pixel(3, 3, 'N')
     matrix.fill(3, 3, 'Y')
 
     expect(matrix.bitmap).to eq({[3, 3]=>"Y"})
@@ -226,5 +225,21 @@ RSpec.describe(Matrix) do
 
   it 'fills pixel that does not exist' do
     expect { matrix.fill(10, 30, 'Y') }.to raise_error(ArgumentError)
+  end
+
+  it 'draws rectangle' do
+    matrix.draw_rectangle(1, 3, 1, 3, 'N')
+    expect(matrix.bitmap).to eq({
+      [1, 1]=>"N", [2, 1]=>"N", [3, 1]=>"N", [1, 3]=>"N", [2, 3]=>"N",
+      [3, 3]=>"N", [1, 2]=>"N", [3, 2]=>"N"
+    })
+  end
+
+  it 'draws rectangle even when parameters are not ordered' do
+    matrix.draw_rectangle(1, 3, 1, 3, 'N')
+    expect(matrix.bitmap).to eq({
+      [1, 1]=>"N", [2, 1]=>"N", [3, 1]=>"N", [1, 3]=>"N", [2, 3]=>"N",
+      [3, 3]=>"N", [1, 2]=>"N", [3, 2]=>"N"
+    })
   end
 end

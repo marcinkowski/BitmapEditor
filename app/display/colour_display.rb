@@ -28,6 +28,6 @@ class ColourDisplay
       result += "\n"
     end
 
-    result
+    result.strip!
   end
 end

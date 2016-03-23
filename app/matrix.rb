@@ -15,7 +15,7 @@ class Matrix
     @background = background
   end
 
-  def colours_pixel(x, y, colour)
+  def colour_pixel(x, y, colour)
     valid_x?(x)
     valid_y?(y)
     valid_colour?(colour)
@@ -55,13 +55,23 @@ class Matrix
     valid_colour?(colour)
 
     old_colour = @bitmap[[x, y]]
-    colours_pixel(x, y, colour)
+    colour_pixel(x, y, colour)
 
     cross_pixels(x, y).each do |coordinates|
       if old_colour == @bitmap[[coordinates[0], coordinates[1]]]
         fill(coordinates[0], coordinates[1], colour)
       end
     end
+  end
+
+  def draw_rectangle(x_start, x_end, y_start, y_end, colour)
+    x_start, x_end = [x_start, x_end].sort
+    y_start, y_end = [y_start, y_end].sort
+
+    draw_horizontal_segment(y_start, x_start, x_end, colour)
+    draw_horizontal_segment(y_end, x_start, x_end, colour)
+    draw_vertical_segment(x_start, y_start, y_end, colour)
+    draw_vertical_segment(x_end, y_start, y_end, colour)
   end
 
   private

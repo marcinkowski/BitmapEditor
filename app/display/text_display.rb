@@ -14,6 +14,6 @@ class TextDisplay
       result += "\n"
     end
 
-    result
+    result.strip!
   end
 end

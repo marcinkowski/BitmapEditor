@@ -10,6 +10,6 @@ RSpec.describe(ColourDisplay) do
     })
 
     text_display = ColourDisplay.new(matrix)
-    expect(text_display.display).to eq("\e[0;39;41m  \e[0m\e[0;39;40m  \e[0m\e[0;39;40m  \e[0m\e[0;39;40m  \e[0m\n\e[0;39;40m  \e[0m\e[0;39;42m  \e[0m\e[0;39;40m  \e[0m\e[0;39;47m  \e[0m\n\e[0;39;40m  \e[0m\e[0;39;40m  \e[0m\e[0;39;44m  \e[0m\e[0;39;40m  \e[0m\n")
+    expect(text_display.display).to eq("\e[0;39;41m  \e[0m\e[0;39;40m  \e[0m\e[0;39;40m  \e[0m\e[0;39;40m  \e[0m\n\e[0;39;40m  \e[0m\e[0;39;42m  \e[0m\e[0;39;40m  \e[0m\e[0;39;47m  \e[0m\n\e[0;39;40m  \e[0m\e[0;39;40m  \e[0m\e[0;39;44m  \e[0m\e[0;39;40m  \e[0m")
   end
 end

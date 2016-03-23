@@ -16,13 +16,15 @@ class BitmapEditor
           when /^I ([1-9][0-9]*) ([1-9][0-9]*)$/
             create_matrix($1.to_i, $2.to_i)
           when /^L ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
-            colours_pixel($1.to_i, $2.to_i, $3)
+            colour_pixel($1.to_i, $2.to_i, $3)
           when /^F ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
             fill($1.to_i, $2.to_i, $3)
           when /^V ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
             draw_vertical_segment($1.to_i, $2.to_i, $3.to_i, $4)
           when /^H ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
             draw_horizontal_segment($3.to_i, $1.to_i, $2.to_i, $4)
+          when /^R ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([1-9][0-9]*) ([A-Z])$/
+            draw_rectangle($1.to_i, $2.to_i, $3.to_i, $4.to_i, $4)
           when 'C'
             clear_matrix
           when 'S'
@@ -56,8 +58,12 @@ class BitmapEditor
     @matrix ? @matrix.clear : error
   end
 
-  def colours_pixel(x, y, colour)
-    @matrix ? @matrix.colours_pixel(x, y, colour) : error
+  def draw_rectangle(x_start, x_end, y_start, y_end, colour)
+    @matrix ? @matrix.draw_rectangle(x_start, x_end, y_start, y_end, colour) : error
+  end
+
+  def colour_pixel(x, y, colour)
+    @matrix ? @matrix.colour_pixel(x, y, colour) : error
   end
 
   def fill(x, y, colour)
@@ -86,7 +92,7 @@ class BitmapEditor
     # Generate colorful background
     1.upto(matrix.width) do |x|
       1.upto(matrix.height) do |y|
-        matrix.colours_pixel(x, y, ['S', 'B', 'C', 'M'].sample)
+        matrix.colour_pixel(x, y, ['S', 'B', 'C', 'M'].sample)
       end
     end
 
@@ -94,8 +100,8 @@ class BitmapEditor
     matrix.draw_vertical_segment(2, 3, 5, 'O')
     matrix.draw_horizontal_segment(2, 3, 4, 'O')
     matrix.draw_horizontal_segment(6, 3, 4 ,'O')
-    matrix.colours_pixel(5, 3, 'O')
-    matrix.colours_pixel(5, 5, 'O')
+    matrix.colour_pixel(5, 3, 'O')
+    matrix.colour_pixel(5, 5, 'O')
     # Letter "A"
     matrix.draw_vertical_segment(7, 3, 6, 'O')
     matrix.draw_vertical_segment(10, 3, 6, 'O')
@@ -106,13 +112,13 @@ class BitmapEditor
     matrix.draw_vertical_segment(15, 3, 4, 'O')
     matrix.draw_horizontal_segment(5, 13, 14 ,'O')
     matrix.draw_horizontal_segment(2, 13, 14 ,'O')
-    matrix.colours_pixel(15, 6, 'O')
+    matrix.colour_pixel(15, 6, 'O')
     # Letter "W"
     matrix.draw_vertical_segment(17, 2, 6, 'O')
     matrix.draw_vertical_segment(21, 2, 6, 'O')
-    matrix.colours_pixel(18, 6, 'O')
-    matrix.colours_pixel(19, 5, 'O')
-    matrix.colours_pixel(20, 6, 'O')
+    matrix.colour_pixel(18, 6, 'O')
+    matrix.colour_pixel(19, 5, 'O')
+    matrix.colour_pixel(20, 6, 'O')
     # Letter "O"
     matrix.draw_vertical_segment(23, 3, 5, 'O')
     matrix.draw_vertical_segment(26, 3, 5, 'O')
@@ -121,9 +127,9 @@ class BitmapEditor
     # Letter "W"
     matrix.draw_vertical_segment(28, 2, 6, 'O')
     matrix.draw_vertical_segment(32, 2, 6, 'O')
-    matrix.colours_pixel(29, 6, 'O')
-    matrix.colours_pixel(30, 5, 'O')
-    matrix.colours_pixel(31, 6, 'O')
+    matrix.colour_pixel(29, 6, 'O')
+    matrix.colour_pixel(30, 5, 'O')
+    matrix.colour_pixel(31, 6, 'O')
 
     puts ColourDisplay.new(matrix).display
   end

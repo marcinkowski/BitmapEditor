@@ -88,7 +88,7 @@ class BitmapEditor
   end
 
   def display_start_image
-    matrix = Matrix.new(33, 7)
+    matrix = Matrix.new(26, 7)
     # Generate colorful background
     1.upto(matrix.width) do |x|
       1.upto(matrix.height) do |y|
@@ -96,40 +96,26 @@ class BitmapEditor
       end
     end
 
-    # Letter "C"
-    matrix.draw_vertical_segment(2, 3, 5, 'O')
-    matrix.draw_horizontal_segment(2, 3, 4, 'O')
-    matrix.draw_horizontal_segment(6, 3, 4 ,'O')
-    matrix.colour_pixel(5, 3, 'O')
-    matrix.colour_pixel(5, 5, 'O')
-    # Letter "A"
-    matrix.draw_vertical_segment(7, 3, 6, 'O')
-    matrix.draw_vertical_segment(10, 3, 6, 'O')
-    matrix.draw_horizontal_segment(5, 8, 9 ,'O')
-    matrix.draw_horizontal_segment(2, 8, 9 ,'O')
-    # Letter "R"
+    # Letter "H"
+    matrix.draw_vertical_segment(2, 2, 6, 'O')
+    matrix.draw_vertical_segment(5, 2, 6, 'O')
+    matrix.draw_horizontal_segment(4, 3, 4, 'O')
+    # Letter "E"
+    matrix.draw_vertical_segment(7, 2, 6, 'O')
+    matrix.draw_horizontal_segment(2, 8, 10 ,'O')
+    matrix.draw_horizontal_segment(4, 8, 9 ,'O')
+    matrix.draw_horizontal_segment(6, 8, 10 ,'O')
+    # Letter "L"
     matrix.draw_vertical_segment(12, 2, 6, 'O')
-    matrix.draw_vertical_segment(15, 3, 4, 'O')
-    matrix.draw_horizontal_segment(5, 13, 14 ,'O')
-    matrix.draw_horizontal_segment(2, 13, 14 ,'O')
-    matrix.colour_pixel(15, 6, 'O')
-    # Letter "W"
+    matrix.draw_horizontal_segment(6, 13, 15 ,'O')
+    # Letter "L"
     matrix.draw_vertical_segment(17, 2, 6, 'O')
-    matrix.draw_vertical_segment(21, 2, 6, 'O')
-    matrix.colour_pixel(18, 6, 'O')
-    matrix.colour_pixel(19, 5, 'O')
-    matrix.colour_pixel(20, 6, 'O')
+    matrix.draw_horizontal_segment(6, 18, 20 ,'O')
     # Letter "O"
-    matrix.draw_vertical_segment(23, 3, 5, 'O')
-    matrix.draw_vertical_segment(26, 3, 5, 'O')
-    matrix.draw_horizontal_segment(2, 24, 25 ,'O')
-    matrix.draw_horizontal_segment(6, 24, 25 ,'O')
-    # Letter "W"
-    matrix.draw_vertical_segment(28, 2, 6, 'O')
-    matrix.draw_vertical_segment(32, 2, 6, 'O')
-    matrix.colour_pixel(29, 6, 'O')
-    matrix.colour_pixel(30, 5, 'O')
-    matrix.colour_pixel(31, 6, 'O')
+    matrix.draw_vertical_segment(22, 3, 5, 'O')
+    matrix.draw_vertical_segment(25, 3, 5, 'O')
+    matrix.draw_horizontal_segment(2, 23, 24 ,'O')
+    matrix.draw_horizontal_segment(6, 23, 24 ,'O')
 
     puts ColourDisplay.new(matrix).display
   end

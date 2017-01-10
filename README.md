@@ -52,23 +52,23 @@ OWOOO
 
 ##  To Install Dependencies:
 ```
-bundle install
+$ bundle install
 ```
 
 ##  To Start Application:
 
 ```
-ruby runner.rb
+$ ruby runner.rb
 ```
 ##  To Start Application with Docker:
 
 ```
-docker build -t bitmap_editor .
-docker run -it --rm bitmap_editor
+$ docker build -t bitmap_editor .
+$ docker run -it --rm bitmap_editor
 ```
 
 ## To Run Rspec
 
 ```
-rspec
+$ rspec
 ```
